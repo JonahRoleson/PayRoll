@@ -177,7 +177,7 @@ plantuml docs/actors_roles.puml
 
 ---
 
-## Next extensions (if you want extra credit polish)
+## Next extensions
 
 - Add an employee search page + filters (department/status/pay type).
 - Add a “sign-off” checkbox and audit trail on PayrollRun.
