@@ -1,0 +1,127 @@
+/* TokyoNight-inspired theme (dark blue + purple/orange accents).
+   This is a lightweight, no-build CSS so the project runs out-of-the-box.
+
+   Palette (approx):
+   - bg: #1a1b26
+   - panel: #24283b
+   - text: #c0caf5
+   - muted: #a9b1d6
+   - purple: #bb9af7
+   - orange: #ff9e64
+   - blue: #7aa2f7
+*/
+
+:root{
+  --bg:#1a1b26;
+  --panel:#24283b;
+  --panel2:#2f334d;
+  --text:#c0caf5;
+  --muted:#a9b1d6;
+  --purple:#bb9af7;
+  --orange:#ff9e64;
+  --blue:#7aa2f7;
+  --danger:#f7768e;
+  --border:#414868;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 14px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--sans);
+  background:linear-gradient(180deg, var(--bg), #16161e);
+  color:var(--text);
+}
+
+a{color:var(--blue); text-decoration:none}
+a:hover{text-decoration:underline}
+
+.container{max-width:1100px; margin:0 auto; padding:24px}
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:14px 18px;
+  background:rgba(36,40,59,.85); border:1px solid var(--border);
+  border-radius:var(--radius); box-shadow:var(--shadow); backdrop-filter: blur(8px);
+}
+.brand{font-weight:700; letter-spacing:.3px}
+.brand .accent{color:var(--purple)}
+.navlinks{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+.badge{
+  font-family:var(--mono);
+  padding:2px 8px; border-radius:999px;
+  background:rgba(187,154,247,.12); border:1px solid rgba(187,154,247,.35);
+  color:var(--purple);
+}
+
+.card{
+  margin-top:18px;
+  background:rgba(36,40,59,.75);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+}
+.card h1,.card h2{margin:0 0 10px 0}
+.muted{color:var(--muted)}
+
+.grid{display:grid; gap:14px}
+.grid.cols-2{grid-template-columns: repeat(2, minmax(0, 1fr))}
+@media (max-width: 860px){ .grid.cols-2{grid-template-columns:1fr} }
+
+.table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  overflow:hidden;
+  border-radius:12px;
+  border:1px solid var(--border);
+}
+.table th, .table td{padding:10px 10px; border-bottom:1px solid rgba(65,72,104,.65)}
+.table th{background:rgba(47,51,77,.7); text-align:left; color:var(--muted); font-weight:600}
+.table tr:hover td{background:rgba(47,51,77,.35)}
+.table tr:last-child td{border-bottom:none}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:8px;
+  padding:10px 14px;
+  background:rgba(122,162,247,.15);
+  border:1px solid rgba(122,162,247,.55);
+  border-radius:12px;
+  color:var(--text);
+  cursor:pointer;
+  font-weight:600;
+}
+.btn:hover{background:rgba(122,162,247,.24)}
+.btn.orange{
+  background:rgba(255,158,100,.12);
+  border-color:rgba(255,158,100,.55);
+}
+.btn.purple{
+  background:rgba(187,154,247,.12);
+  border-color:rgba(187,154,247,.55);
+}
+.btn.danger{
+  background:rgba(247,118,142,.12);
+  border-color:rgba(247,118,142,.55);
+}
+
+.input, select, textarea{
+  width:100%;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(26,27,38,.55);
+  color:var(--text);
+  outline:none;
+}
+label{display:block; margin:10px 0 6px 0; color:var(--muted)}
+.formrow{margin-bottom:12px}
+
+.flash{margin-top:14px; padding:10px 12px; border-radius:12px; border:1px solid var(--border)}
+.flash.success{border-color:rgba(158,206,106,.55); background:rgba(158,206,106,.12)}
+.flash.error{border-color:rgba(247,118,142,.55); background:rgba(247,118,142,.12)}

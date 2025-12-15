@@ -1,0 +1,61 @@
+@startuml
+title ABC Company Payroll System - Actors & Roles
+
+actor "HR Admin
+(User: HR0001)" as HR
+actor "Employee" as EMP
+actor "Payroll Dept
+(Printer/File Consumer)" as PAY
+actor "HR Sign-Off" as SIGN
+
+rectangle "Django Payroll Web App" as APP {
+  usecase "Login" as UC_LOGIN
+  usecase "Manage Employees
+(Add/Edit/Delete/Search)" as UC_EMP
+  usecase "Manage Salary & Benefits" as UC_SAL
+  usecase "Enter Hours & PTO" as UC_TIME
+  usecase "Submit Time Entry" as UC_SUBMIT
+  usecase "Calculate Payroll
+(Lock Time Entries)" as UC_CALC
+  usecase "View Paycheck Breakdown" as UC_VIEW
+  usecase "Generate Reports
+(HR Review)" as UC_REPORT
+  usecase "Export Payroll File
+(CSV for printing)" as UC_EXPORT
+  usecase "View Application Info
+(Version)" as UC_INFO
+}
+
+HR --> UC_LOGIN
+HR --> UC_EMP
+HR --> UC_SAL
+HR --> UC_CALC
+HR --> UC_REPORT
+HR --> UC_EXPORT
+HR --> UC_INFO
+
+EMP --> UC_LOGIN
+EMP --> UC_TIME
+EMP --> UC_SUBMIT
+EMP --> UC_VIEW
+
+SIGN --> UC_REPORT
+SIGN --> UC_EXPORT
+
+PAY --> UC_EXPORT
+
+note right of UC_CALC
+Pretax deductions (medical)
+are applied before taxes.
+end note
+
+note bottom of UC_TIME
+Hourly rules:
+- >8/day = 1.5x
+- Saturday = 1.5x
+Salary rules:
+- Paid 8h Mon-Fri
+- PTO only entry
+end note
+
+@enduml
