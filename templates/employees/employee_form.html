@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load form_extras %}
+{% block title %}Employee{% endblock %}
+{% block content %}
+  <h1>Employee</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="formrow">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field|add_class:"input" }}
+        {% if field.errors %}<div class="muted">{{ field.errors }}</div>{% endif %}
+        {% if field.help_text %}<div class="muted">{{ field.help_text }}</div>{% endif %}
+      </div>
+    {% endfor %}
+    <button class="btn purple" type="submit">Save</button>
+    <a class="btn" href="{% url 'employee_list' %}">Back</a>
+  </form>
+{% endblock %}

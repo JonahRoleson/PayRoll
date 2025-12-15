@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+  <h1>Dashboard</h1>
+
+  {% if user.is_staff %}
+    <p class="muted">You are logged in as <b>HR/Admin</b>. Use the menu to manage employees and run payroll.</p>
+    <div class="grid cols-2">
+      <div class="card" style="margin-top:0;">
+        <h2>Quick actions</h2>
+        <p><a class="btn orange" href="{% url 'employee_new' %}">Add Employee</a></p>
+        <p><a class="btn" href="{% url 'payroll_run_new' %}">Calculate Payroll</a></p>
+        <p><a class="btn purple" href="/admin/">Django Admin</a></p>
+      </div>
+      <div class="card" style="margin-top:0;">
+        <h2>Notes</h2>
+        <p class="muted">Payroll calculation will lock time entries for the selected pay period.</p>
+      </div>
+    </div>
+  {% else %}
+    <p class="muted">You are logged in as <b>Employee</b>.</p>
+    {% if employee %}
+      <p>Employee ID: <span class="badge">{{ employee.employee_id }}</span></p>
+      <p><a class="btn orange" href="{% url 'my_time_entries' %}">Enter / View Time</a></p>
+    {% else %}
+      <p class="muted">No Employee record is linked to this account yet.</p>
+    {% endif %}
+  {% endif %}
+{% endblock %}

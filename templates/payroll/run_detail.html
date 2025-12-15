@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Payroll Run{% endblock %}
+{% block content %}
+  <h1>Payroll Run</h1>
+  <p class="muted">Period: <b>{{ run.period_start }}</b> .. <b>{{ run.period_end }}</b></p>
+  <p><a class="btn purple" href="{% url 'payroll_export_csv' run.pk %}">Export CSV</a></p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Employee</th><th>Gross</th><th>Pretax</th><th>Taxable</th><th>State</th><th>Federal</th><th>SS</th><th>Med</th><th>Net</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in run.paychecks.all %}
+      <tr>
+        <td>{{ p.employee.employee_id }}</td>
+        <td>{{ p.gross_pay }}</td>
+        <td>{{ p.pretax_deductions }}</td>
+        <td>{{ p.taxable_wages }}</td>
+        <td>{{ p.state_tax_employee }}</td>
+        <td>{{ p.federal_tax_employee }}</td>
+        <td>{{ p.social_security_employee }}</td>
+        <td>{{ p.medicare_employee }}</td>
+        <td><b>{{ p.net_pay }}</b></td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="9" class="muted">No paychecks.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

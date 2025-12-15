@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Reports{% endblock %}
+{% block content %}
+  <h1>Reports</h1>
+  <p class="muted">Starter report hub. Extend with PDFs/sign-off workflow as needed.</p>
+  <h2>Recent payroll runs</h2>
+  <ul>
+    {% for r in runs %}
+      <li><a href="{% url 'payroll_run_detail' r.pk %}">{{ r.period_start }} .. {{ r.period_end }}</a></li>
+    {% empty %}
+      <li class="muted">No payroll runs yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

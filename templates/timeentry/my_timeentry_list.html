@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Time Entry{% endblock %}
+{% block content %}
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+    <h1>Time Entry</h1>
+    {% if not user.is_staff %}
+      <a class="btn purple" href="{% url 'timeentry_new' %}">New</a>
+    {% endif %}
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        {% if user.is_staff %}<th>Employee</th>{% endif %}
+        <th>Date</th><th>Hours</th><th>PTO</th><th>Submitted</th><th>Locked</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for e in entries %}
+      <tr>
+        {% if user.is_staff %}<td>{{ e.employee.employee_id }}</td>{% endif %}
+        <td>{{ e.work_date }}</td>
+        <td>{{ e.hours_worked }}</td>
+        <td>{{ e.pto_hours }}</td>
+        <td>{{ e.submitted }}</td>
+        <td>{{ e.locked }}</td>
+        <td style="white-space:nowrap;">
+          <a class="btn" href="{% url 'timeentry_edit' e.pk %}">Edit</a>
+          <a class="btn orange" href="{% url 'timeentry_submit' e.pk %}">Submit</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="7" class="muted">No entries yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

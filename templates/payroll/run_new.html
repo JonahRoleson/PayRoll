@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}New Payroll Run{% endblock %}
+{% block content %}
+  <h1>Calculate Payroll</h1>
+  <p class="muted">This will lock time entries for the selected pay period.</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="grid cols-2">
+      <div class="formrow">
+        <label>Period start (YYYY-MM-DD)</label>
+        <input class="input" name="period_start" required placeholder="2025-12-08">
+      </div>
+      <div class="formrow">
+        <label>Period end (YYYY-MM-DD)</label>
+        <input class="input" name="period_end" required placeholder="2025-12-14">
+      </div>
+    </div>
+    <button class="btn orange" type="submit">Calculate & Lock</button>
+    <a class="btn" href="{% url 'payroll_runs' %}">Back</a>
+  </form>
+{% endblock %}

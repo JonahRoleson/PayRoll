@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load form_extras %}
+{% block title %}Login{% endblock %}
+{% block content %}
+  <h1>Login</h1>
+  <p class="muted">Admin (HR) users and Employees use the same login form.</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="formrow">
+      <label for="id_username">User ID / Email</label>
+      {{ form.username|add_class:"input" }}
+    </div>
+    <div class="formrow">
+      <label for="id_password">Password</label>
+      {{ form.password|add_class:"input" }}
+    </div>
+    <button class="btn purple" type="submit">Sign in</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Payroll Runs{% endblock %}
+{% block content %}
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+    <h1>Payroll Runs</h1>
+    <a class="btn purple" href="{% url 'payroll_run_new' %}">New</a>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr><th>Period</th><th>Calculated At</th><th>By</th><th>Locked</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for r in runs %}
+      <tr>
+        <td>{{ r.period_start }} .. {{ r.period_end }}</td>
+        <td>{{ r.calculated_at }}</td>
+        <td>{{ r.calculated_by }}</td>
+        <td>{{ r.locked }}</td>
+        <td><a class="btn" href="{% url 'payroll_run_detail' r.pk %}">View</a></td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5" class="muted">No payroll runs yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
