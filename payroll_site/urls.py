@@ -19,6 +19,7 @@ urlpatterns = [
     path("time/", include("timeentry.urls")),
     path("payroll/", include("payroll.urls")),
     path("reports/", include("reports_app.urls")),
+    path("security/", include("security.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = "security.views.error_404"
